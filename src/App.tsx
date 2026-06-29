@@ -14,7 +14,6 @@ interface StatusMessage {
 function App() {
   const [saveData, setSaveData] = useState<SaveData | null>(null)
   const [originalFileName, setOriginalFileName] = useState<string>('')
-  const [originalBytes, setOriginalBytes] = useState<Uint8Array | null>(null)
   const [status, setStatus] = useState<StatusMessage | null>(null)
   const [isNative, setIsNative] = useState(false)
 
@@ -39,7 +38,6 @@ function App() {
       
       setSaveData(data)
       setOriginalFileName(fileName)
-      setOriginalBytes(bytes)
       setStatus({ type: 'success', message: `成功加载: ${fileName}` })
       
       // 3秒后清除状态消息
@@ -64,7 +62,7 @@ function App() {
       const encodedBytes = encodeJsonToSav(jsonStr)
       
       // 创建下载
-      const blob = new Blob([encodedBytes], { type: 'application/octet-stream' })
+      const blob = new Blob([encodedBytes.buffer], { type: 'application/octet-stream' })
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
@@ -88,7 +86,6 @@ function App() {
   const handleClear = () => {
     setSaveData(null)
     setOriginalFileName('')
-    setOriginalBytes(null)
     setStatus(null)
   }
 

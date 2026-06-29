@@ -43,7 +43,6 @@ export function SaveEditor({ saveData, setSaveData, currencyValues }: SaveEditor
   })
   
   const [expandedSection, setExpandedSection] = useState<string | null>('currency')
-  const [showMaxConfirm, setShowMaxConfirm] = useState(false)
 
   const handleValueChange = (field: keyof EditValue, value: string) => {
     // 只允许数字输入
