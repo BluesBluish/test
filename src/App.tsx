@@ -62,7 +62,7 @@ function App() {
       const encodedBytes = encodeJsonToSav(jsonStr)
       
       // 创建下载
-      const blob = new Blob([encodedBytes.buffer], { type: 'application/octet-stream' })
+      const blob = new Blob([new Uint8Array(encodedBytes)], { type: 'application/octet-stream' })
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
